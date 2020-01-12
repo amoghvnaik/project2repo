@@ -12,10 +12,10 @@ pipeline{
 		}
                 stage('--deployment--'){
                         steps{
-                                sh '''ssh deployment << BOB
+                                sh '''ssh 34.89.51.20 << BOB
 				      export BUILD_NUMBER="${BUILD_NUMBER}"
-				      #docker stack deploy --compose-file docker-compose.yaml project2
-                                      docker service update --image project-jenkins:5000/service2:build-${BUILD_NUMBER} --replicas "3" --update-order "start-first" --update-parallelism "1" project2_service2
+				      docker stack deploy --compose-file docker-compose.yaml project2
+                                      #docker service update --image project-jenkins:5000/service2:build-${BUILD_NUMBER} --replicas "3" --update-order "start-first" --update-parallelism "1" project2_service2
                                       '''
                         }
                 }
