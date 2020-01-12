@@ -1,7 +1,7 @@
 import requests
 from application import app
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def proverb():
     random_number = requests.get('http://service2:5001').json()["number"]
     random_letter = requests.get('http://service3:5002').json()["letter"]
