@@ -31,7 +31,7 @@ My solution was to create a web application that can generate a proverb based on
 ## Planning
 I used Trello to plan my project. My justification for using Trello is that it is free, easy to use and clearly structured. My Trello board is shown below:
 
-![alt text](https://github.com/amoghvnaik/project2repo/blob/master/documentation/Trello.png)
+![alt text](https://github.com/amoghvnaik/project2repo/blob/master/documentation/Trello_board.png)
 
 <a name="User"></a>
 ## User Stories & Use Cases
