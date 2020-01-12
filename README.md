@@ -156,7 +156,7 @@ Obviously, this is a fairly lengthy process and in the future, I would simplify 
 
 <a name="Conclusion"></a>
 ## Project Changes & Conclusion
-There were a few changes I made between my initial plan and my final application. In my initial plan, I was planning to have my services connected by using get requests. However, in my final application they are connected using post requests, which are more secure. In my initial plan, I was planning to have only four Docker containers for my four services. However, in my final application I also have an nginx container acting as a proxy pass, which makes the application more secure by making it harder to access the back end services. In the future, I would look at incorporating Bootstrap, integration testing and running the database in a Docker container rather than a separate instance.
+In my initial plan, I was planning to have only four Docker containers for my four services. However, in my final application I also have an nginx container acting as a proxy pass, which makes the application more secure by making it harder to access the back end services. In the future, I would look at incorporating Bootstrap, integration testing and running the database in a Docker container rather than a separate instance.
 
 In conclusion, I was able to successfully plan, create, test and deploy a service-oriented application, using DevOps technologies such as Github, Jenkins, Docker and Ansible to satisfy all of the SFIA project aims to the best of my ability. 
 
