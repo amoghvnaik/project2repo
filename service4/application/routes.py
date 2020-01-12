@@ -1,10 +1,10 @@
 import requests
 from application import app
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET'])
 def proverb():
-    random_number = requests.post('http://service2:5001').json()["number"]
-    random_letter = requests.post('http://service3:5002').json()["letter"]
+    random_number = requests.get('http://service2:5001').json()["number"]
+    random_letter = requests.get('http://service3:5002').json()["letter"]
     if random_number=='0' and random_letter=='A':
         return {"proverb":"Number: 0, Letter: A, Proverb: A bird in hand is worth two in the bush"}
     elif random_number=='0' and random_letter=='B':

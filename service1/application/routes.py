@@ -90,7 +90,7 @@ def account():
 def generate():
     form=GenerateForm()
     if form.submit.data:
-        res = requests.post("http://service4:5003").json()["proverb"]
+        res = requests.get("http://service4:5003").json()["proverb"]
         duplicate = Proverbs.query.filter_by(proverb=res).filter_by(user_id=current_user.id).first()
         if duplicate:
             pass
