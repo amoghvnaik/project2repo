@@ -12,7 +12,7 @@ pipeline{
 		}
                 stage('--deployment--'){
                         steps{
-                                sh '''ssh 34.89.51.20 << BOB
+                                sh '''ssh deployment << BOB
 				      export BUILD_NUMBER="${BUILD_NUMBER}"
 				      cd project2repo
 				      git pull
