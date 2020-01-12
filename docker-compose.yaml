@@ -1,0 +1,74 @@
+version: '3.7'
+services:
+  service1:
+    image: instance-3:5000/service1:build-${BUILD_NUMBER}
+    container_name: service1
+    build:
+      context: ./service1
+      args:
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_IP=${MYSQL_IP}
+        - MYSQL_DB=${MYSQL_DB}
+        - MYSQL_DB_TEST=${MYSQL_DB_TEST}
+        - MYSQL_KEY=${MYSQL_KEY}
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        order: start-first
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_IP=${MYSQL_IP}
+      - MYSQL_DB=${MYSQL_DB}
+      - MYSQL_KEY=${MYSQL_KEY}
+  service2:
+    image: instance-3:5000/service2:build-${BUILD_NUMBER}
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        order: start-first
+    container_name: service2
+    build: ./service2
+  service3:
+    image: instance-3:5000/service3:build-${BUILD_NUMBER}
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        order: start-first
+    container_name: service3
+    build: ./service3
+  service4:
+    image: instance-3:5000/service4:build-${BUILD_NUMBER}
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        order: start-first
+    container_name: service4
+    build: ./service4
+  nginx:
+    image: nginx:alpine
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        order: start-first
+    container_name: nginx
+    ports:
+      - target: 80
+        published: 80
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf 
+    depends_on:
+      - service1

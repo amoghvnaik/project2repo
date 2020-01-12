@@ -1,0 +1,15 @@
+[vm1]
+project-jenkins
+
+[vm2]
+deployment
+
+[vm1:vars]
+ansible_user=amoghvnaik
+ansible_ssh_private_key_file=~/.ssh/google_compute_engine
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[vm2:vars]
+ansible_user=amoghvnaik
+ansible_ssh_private_key_file=~/.ssh/google_compute_engine
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

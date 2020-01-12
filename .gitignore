@@ -1,0 +1,16 @@
+.coverage
+.pytest_cache/
+venv/
+service1/__pycache__/
+service1/application/__pycache__/
+service1/tests/__pycache__/
+service2/__pycache__/
+service2/application/__pycache__/
+service2/tests/__pycache__/
+service3/__pycache__/
+service3/application/__pycache__/
+service3/tests/__pycache__/
+service4/__pycache__/
+service4/application/__pycache__/
+service4/tests/__pycache__/
+

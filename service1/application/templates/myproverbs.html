@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+{% for post in proverbs %}
+	<div>
+		<h3>{{ post.proverb }}</h3>
+	</div>
+{% endfor %}
+{% endblock body_content %}
+

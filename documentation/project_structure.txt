@@ -1,0 +1,78 @@
+.
+├── docker-compose.yaml
+├── documentation
+│   ├── About.png
+│   ├── Account.png
+│   ├── CI_Pipeline.jpg
+│   ├── Containers.jpg
+│   ├── ERD.jpg
+│   ├── Generate.png
+│   ├── Home.png
+│   ├── Login.png
+│   ├── Myproverbs.png
+│   ├── project_structure.txt
+│   ├── Register.png
+│   ├── Risks.jpg
+│   ├── Service_1_test.png
+│   ├── Service_2_test.png
+│   ├── Service_3_test.png
+│   ├── Trello.png
+│   └── usecases.jpg
+├── install1.sh
+├── install2.sh
+├── Jenkinsfile
+├── maininventory
+├── mainplaybook.yaml
+├── nginx.conf
+├── README.md
+├── service1
+│   ├── application
+│   │   ├── forms.py
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── routes.py
+│   │   └── templates
+│   │       ├── about.html
+│   │       ├── account.html
+│   │       ├── generate.html
+│   │       ├── home.html
+│   │       ├── layout.html
+│   │       ├── login.html
+│   │       ├── myproverbs.html
+│   │       └── register.html
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── tests
+│       ├── __init__.py
+│       └── test_back_end.py
+├── service2
+│   ├── application
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── tests
+│       ├── __init__.py
+│       └── test_routes.py
+├── service3
+│   ├── application
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── tests
+│       ├── __init__.py
+│       └── test_routes.py
+└── service4
+    ├── application
+    │   ├── __init__.py
+    │   └── routes.py
+    ├── app.py
+    ├── Dockerfile
+    ├── requirements.txt
+    └── tests
+        ├── __init__.py
+        └── test_routes.py

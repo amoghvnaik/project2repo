@@ -1,0 +1,244 @@
+- name: Docker
+  hosts: vm1
+  become: true
+  tasks:
+  - name: Update local database
+    apt:
+       update_cache: true
+  - name: Download dependencies
+    apt:
+      name: 
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      state: latest
+      update_cache: true
+  - name: docker gpg key
+    apt_key:
+      url: "https://download.docker.com/linux/ubuntu/gpg"
+      state: present
+  - name: docker apt repo
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
+      state: present
+  - name: Update repositories
+    apt:
+      update_cache: true
+  - name: Docker install
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+- name: Docker Compose
+  hosts: vm1
+  become: true
+  tasks:
+  - name: Python pip
+    apt:
+      name: python-pip
+      state: latest
+      update_cache: true
+  - name: Docker compose
+    pip:
+      name: docker-compose
+
+- name: Jenkins
+  hosts: vm1
+  become: true
+  tasks:
+  - name: jenkins user
+    user:
+      name: jenkins
+      groups:
+      - docker
+      append: true
+      shell: /bin/bash
+  - name: install java
+    apt:
+      name: openjdk-8-jdk
+      state: latest
+      update_cache: true
+  - name: jenkins gpg key
+    apt_key:
+      url: "https://pkg.jenkins.io/debian/jenkins.io.key"
+      state: present
+  - name: jenkins apt repo
+    apt_repository:
+      repo: "deb http://pkg.jenkins.io/debian-stable binary/"
+      state: present
+  - name: jenkins install
+    apt:
+      name: jenkins
+      state: latest
+      update_cache: true
+  - name: jenkins service
+    service:
+      name: jenkins
+      state: started
+  - name: Sleep
+    wait_for: timeout=30
+  - name: Get password
+    shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+    changed_when: false
+    register: result
+  - name: Print password
+    debug:
+      var: result.stdout
+
+- name: Other
+  hosts: vm1
+  become: true
+  tasks:
+  - name: Give Jenkins priviledges
+    copy:
+      src: /etc/sudoers
+      dest: /etc/sudoers
+  - name: Install git
+    apt:
+      name: git
+      state: present
+      update_cache: yes
+  - name: Docker SDK
+    pip:
+      name: docker
+  - name: Docker registry container
+    docker_container:
+      name: registry
+      image: registry:2
+      ports:
+      - "5000:5000"
+      state: started
+  - name: ssh folder
+    file:
+      path: /var/lib/jenkins/.ssh
+      state: directory
+      mode: "0700"
+      owner: jenkins
+      group: jenkins
+  - name: Install private key
+    copy:
+       src: /home/amoghvnaik/.ssh/id_rsa
+       dest: /home/jenkins/.ssh/id_rsa
+       owner: jenkins
+       group: jenkins
+       mode: u=rw,g=,o=
+  - name: Insecure registry
+    copy:
+      src: /etc/docker/daemon.json
+      dest: /etc/docker/daemon.json
+      owner: jenkins
+      group: jenkins
+      mode: u=rw,g=,o=
+  - name: Docker restart
+    service:
+      name: docker
+      state: restarted
+  - name: Environment variables
+    copy:
+      src: ~/.bashrc
+      dest: ~/.bashrc
+      owner: jenkins
+      group: jenkins
+      mode: u=rw,g=,o=
+
+
+- name: Docker
+  hosts: vm2
+  become: true
+  tasks:
+  - name: Update local database
+    apt:
+       update_cache: true
+  - name: Download dependencies
+    apt:
+      name: 
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      state: latest
+      update_cache: true
+  - name: docker gpg key
+    apt_key:
+      url: "https://download.docker.com/linux/ubuntu/gpg"
+      state: present
+  - name: docker apt repo
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
+      state: present
+  - name: Update repositories
+    apt:
+      update_cache: true
+  - name: Docker install
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+- name: Other
+  hosts: vm2
+  become: true
+  tasks:
+  - name: Create jenkins user
+    user:
+      name: jenkins
+      groups:
+      - docker
+      append: true
+      shell: /bin/bash
+  - name: Give Jenkins priviledges
+    copy:
+      src: /etc/sudoers
+      dest: /etc/sudoers
+  - name: Install git
+    apt:
+      name: git
+      state: present
+      update_cache: yes
+  - name: Clone git repo
+    git:
+      repo: 'https://github.com/amoghvnaik/project2.git'
+      dest: /home/amoghvnaik/project2
+  - name: ssh folder
+    file:
+      path: /var/lib/jenkins/.ssh
+      state: directory
+      mode: "0700"
+      owner: jenkins
+      group: jenkins
+  - name: Install public key
+    copy:
+       src: /home/amoghvnaik/.ssh/id_rsa.pub
+       dest: /home/jenkins/.ssh/id_rsa.pub
+       owner: jenkins
+       group: jenkins
+       mode: u=rw,g=,o=
+  - name: Insecure registry
+    copy:
+      src: /etc/docker/daemon.json
+      dest: /etc/docker/daemon.json
+      owner: jenkins
+      group: jenkins
+      mode: u=rw,g=,o=
+  - name: Docker restart
+    service:
+      name: docker
+      state: restarted
+  - name: Environment variables
+    copy:
+      src: ~/.bashrc
+      dest: ~/.bashrc
+      owner: jenkins
+      group: jenkins
+      mode: u=rw,g=,o=
+  - name: Docker swarm init
+    docker_swarm:
+      state: present
+  - name: Deploy stack
+    docker_stack:
+      state: present
+      name: project2
+      compose:
+        - /home/jenkins/project2/docker-compose.yaml 

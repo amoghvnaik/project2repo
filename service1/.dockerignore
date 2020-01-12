@@ -1,0 +1,7 @@
+*
+!application/
+!tests/
+!.coveragerc
+!app.py
+!requirements.txt
+
