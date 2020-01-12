@@ -3,5 +3,5 @@ from application import app
 
 @app.route('/', methods=['POST'])
 def random_number():
-    random_number = str(randint(3, 5))
+    random_number = str(randint(0, 2))
     return {"number":random_number}
