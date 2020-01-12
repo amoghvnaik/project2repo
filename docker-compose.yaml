@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   service1:
-    image: instance-3:5000/service1:build-${BUILD_NUMBER}
+    image: project-jenkins:5000/service1:build-${BUILD_NUMBER}
     container_name: service1
     build:
       context: ./service1
@@ -25,7 +25,7 @@ services:
       - MYSQL_DB=${MYSQL_DB}
       - MYSQL_KEY=${MYSQL_KEY}
   service2:
-    image: instance-3:5000/service2:build-${BUILD_NUMBER}
+    image: project-jenkins:5000/service2:build-${BUILD_NUMBER}
     deploy:
       mode: replicated
       replicas: 3
@@ -35,7 +35,7 @@ services:
     container_name: service2
     build: ./service2
   service3:
-    image: instance-3:5000/service3:build-${BUILD_NUMBER}
+    image: project-jenkins:5000/service3:build-${BUILD_NUMBER}
     deploy:
       mode: replicated
       replicas: 3
@@ -45,7 +45,7 @@ services:
     container_name: service3
     build: ./service3
   service4:
-    image: instance-3:5000/service4:build-${BUILD_NUMBER}
+    image: project-jenkins:5000/service4:build-${BUILD_NUMBER}
     deploy:
       mode: replicated
       replicas: 3
