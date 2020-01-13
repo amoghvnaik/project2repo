@@ -14,7 +14,7 @@ pipeline{
                         steps{
                                 sh '''ssh deployment << BOB
 				      export BUILD_NUMBER="${BUILD_NUMBER}"
-                                      docker service update --image project-jenkins:5000/service2:build-${BUILD_NUMBER} --replicas "10" --update-order "start-first" --update-parallelism "1" project2_service2
+                                      docker service update --image project-jenkins:5000/service2:build-${BUILD_NUMBER} --replicas "5" --update-order "start-first" --update-parallelism "1" project2_service2
                                       '''
                         }
                 }
