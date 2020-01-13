@@ -1,6 +1,5 @@
 # SFIA Project 2
 ### Amogh Naik
-Presentation: https://docs.google.com/presentation/d/1572b76jEKoVBdfmcMTgBZaPvvUuFEd8LmZJU6Sux5NM/edit#slide=id.g7660501d3d_0_35
 
 ## Contents
 * [Introduction](#Introduction)
