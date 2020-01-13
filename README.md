@@ -65,7 +65,7 @@ Before starting the project, I identified a number of risks which are shown belo
 
 <a name="Back"></a>
 ## Back end architecture
-My application consists of four services working together. In the first implementation, service 2 generates a random number between 0 and 2, service 3 generates a random letter between A and C and service 4 generates a proverb based on this random number and letter. This proverb is then sent to service 1 which displays it to the user. In the second implementation, the number is between 3 and 5 and a new set of proverbs is generated. Each service is deployed inside a Docker container and there is also an nginx container acting as a proxy pass. The structure of my containers is shown below:
+My application consists of four services working together. In the first implementation, service 2 generates a random number between 0 and 2, service 3 generates a random letter between A and C and service 4 generates a proverb based on this random number and letter. This proverb is then sent to service 1 which displays it to the user. In the second implementation, the number is between 3 and 5 and a new set of proverbs is generated. Each service is deployed inside a Docker container and there is also an nginx container acting as a reverse proxy. The structure of my containers is shown below:
 
 ![alt text](https://github.com/amoghvnaik/project2repo/blob/master/documentation/Containers.jpg)
 
@@ -169,7 +169,7 @@ Obviously, this is a fairly lengthy process and in the future, I would simplify 
 
 <a name="Conclusion"></a>
 ## Project Changes & Conclusion
-In my initial plan, I was planning to have only four Docker containers for my four services. However, in my final application I also have an nginx container acting as a proxy pass, which makes the application more secure by making it harder to access the back end services. In the future, I would look at incorporating Bootstrap, integration testing and running the database in a Docker container rather than a separate instance.
+In my initial plan, I was planning to have only four Docker containers for my four services. However, in my final application I also have an nginx container acting as a reverse proxy, which makes the application more secure by making it harder to access the back end services. In the future, I would look at incorporating Bootstrap, integration testing and running the database in a Docker container rather than a separate instance.
 
 In conclusion, I was able to successfully plan, create, test and deploy a service-oriented application, using DevOps technologies such as Github, Jenkins, Docker and Ansible to satisfy all of the SFIA project aims to the best of my ability. 
 
