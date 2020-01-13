@@ -149,11 +149,11 @@ To launch the application on Linux, you must do the following:
 * Open your terminal
 * Enter the .bashrc file by using the command 'vim .bashrc'
 * Add the following environment variables to your .bashrc: 
-  1. 'export MYSQL_USER={yourusername}'
-  2. 'export MYSQL_PASSWORD={yourpassword}'
-  3. 'export MYSQL_IP={yourip}'
-  4. 'export MYSQL_DB={yourdb1}'
-  5. 'export MYSQL_DB_TEST={yourdb2}'
+  1. 'export MYSQL_USER={your username}'
+  2. 'export MYSQL_PASSWORD={your password}'
+  3. 'export MYSQL_IP={your database IP}'
+  4. 'export MYSQL_DB={your first database}'
+  5. 'export MYSQL_DB_TEST={your second database}'
   6. 'export MYSQL_KEY={anything}'
 * Install Git on your machine using the command 'sudo apt install git'
 * Clone down this repository by using the command 'git clone https://github.com/amoghvnaik/project2.git'
